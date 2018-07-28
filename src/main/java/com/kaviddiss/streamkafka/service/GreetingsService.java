@@ -24,6 +24,7 @@ public class GreetingsService {
         messageChannel.send(MessageBuilder
                 .withPayload(greetings)
 //                .setHeader(MessageHeaders.CONTENT_TYPE, MimeTypeUtils.APPLICATION_JSON)
+                .setHeader("type", "greetings")
                 .build());
     }
 }

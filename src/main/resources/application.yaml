@@ -5,8 +5,8 @@ spring:
         binder:
           brokers: localhost:9092
           autoAddPartitions: true
-      default:
-        contentType: application/json          
+#      default:
+#        contentType: application/json          
 #        bindings: 
 #          goodbyes-in:
 #            consumer:
@@ -27,4 +27,5 @@ spring:
       instanceCount: ${CONSUMER_INSTANCE_COUNT:2}
       instanceIndex: ${CONSUMER_INSTANCE_INDEX:0}           
 server:
-  port: ${PRODUCER_PORT:8080}            
+  port: ${PRODUCER_PORT:8080}      
+ 

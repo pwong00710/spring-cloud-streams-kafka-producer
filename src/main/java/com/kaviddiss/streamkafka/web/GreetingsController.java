@@ -25,19 +25,10 @@ public class GreetingsController {
     @GetMapping("/greetings")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void greetings(@RequestParam("name") String name, @RequestParam("message") String message) {
-//        Greetings greetings = Greetings.builder()
-//            .id(Greetings.nextId())
-//            .txnId(Greetings.nextTxnId())
-//            .name(name)
-//            .message(message)
-//            .timestamp(System.currentTimeMillis())
-//            .build();
-        Greetings greetings = new Greetings();
-        greetings.setId(Greetings.nextId());
-        greetings.setTxnId(Greetings.nextTxnId());
-        greetings.setName(name);
-        greetings.setMessage(message);
-        greetings.setTimestamp(System.currentTimeMillis());
+        Greetings greetings = Greetings.builder()
+            .name(name)
+            .message(message)
+            .build();
         
         greetingsService.sendGreeting(greetings);
     }

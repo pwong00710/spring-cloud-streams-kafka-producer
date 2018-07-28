@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 public class GoodbyesListener {
-    @StreamListener(HelloStreams.INPUT)
+    @StreamListener(target = HelloStreams.INPUT, condition = "headers['type']=='goodbyes'")
     public void handleGoodbyes(@Payload Goodbyes goodbyes) {
         log.info("Received goodbyes: {}", goodbyes);
     }
