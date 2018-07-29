@@ -23,7 +23,7 @@ spring:
 #          contentType: application/json
           producer:
             partitionKeyExpression: payload.partitionId
-            partitionCount: ${CONSUMER_INSTANCE_COUNT:2}
+            partitionCount: ${CONSUMER_INSTANCE_COUNT:2}       
       instanceCount: ${CONSUMER_INSTANCE_COUNT:2}
       instanceIndex: ${CONSUMER_INSTANCE_INDEX:0}           
 server:
