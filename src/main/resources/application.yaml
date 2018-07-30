@@ -3,14 +3,14 @@ spring:
     stream:
       kafka:
         binder:
-          brokers: localhost:9092
+          brokers: ${KAFKA_HOSTNAME:localhost}:9092
           autoAddPartitions: true
 #      default:
 #        contentType: application/json          
-#        bindings: 
-#          goodbyes-in:
-#            consumer:
-#             autoRebalanceEnabled: false
+        bindings: 
+          goodbyes-in:
+            consumer:
+             autoRebalanceEnabled: false
       bindings:
         goodbyes-in:
           destination: goodbyes

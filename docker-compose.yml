@@ -1,0 +1,47 @@
+version: '2.4'
+services:
+  zookeeper:
+    image: wurstmeister/zookeeper
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+    networks:
+      - network1
+  kafka:
+    image: wurstmeister/kafka
+    container_name: kafka
+    ports:
+      - "9092:9092"
+    networks:
+      - network1      
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: 192.168.0.106
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  kafka_producer_1:
+    image: kafka_producer
+    ports:
+      - "8080:8080"
+    networks:
+      - network1
+    environment:
+      KAFKA_HOSTNAME: kafka
+      CONSUMER_INSTANCE_INDEX: 0
+  kafka_producer_2:
+    image: kafka_producer
+    ports:
+      - "8081:8080"
+    networks:
+      - network1
+    environment:
+      KAFKA_HOSTNAME: kafka 
+      CONSUMER_INSTANCE_INDEX: 1
+  kafka_consumer:
+    image: kafka_consumer
+    networks:
+      - network1
+    environment:
+      KAFKA_HOSTNAME: kafka      
+networks:
+  network1:

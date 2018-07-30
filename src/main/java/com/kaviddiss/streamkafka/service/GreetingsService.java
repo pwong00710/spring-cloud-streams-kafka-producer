@@ -1,15 +1,12 @@
 package com.kaviddiss.streamkafka.service;
 
 import com.kaviddiss.streamkafka.model.Greetings;
-import com.kaviddiss.streamkafka.stream.GreetingsStreams;
 import com.kaviddiss.streamkafka.stream.HelloStreams;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.MessageChannel;
-import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
-import org.springframework.util.MimeTypeUtils;
 
 @Service
 @Slf4j

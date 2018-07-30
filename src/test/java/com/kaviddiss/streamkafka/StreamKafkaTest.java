@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kaviddiss.streamkafka.config.TestConfig;
 import com.kaviddiss.streamkafka.model.Goodbyes;
 import com.kaviddiss.streamkafka.model.Greetings;
+import com.kaviddiss.streamkafka.service.DummyService;
 import com.kaviddiss.streamkafka.service.GoodbyesListener;
 import com.kaviddiss.streamkafka.service.GreetingsService;
 import com.kaviddiss.streamkafka.stream.HelloStreams;
@@ -28,6 +29,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
@@ -52,6 +54,9 @@ public class StreamKafkaTest {
     
     @SpyBean
     GoodbyesListener goodbyesListener;
+
+    @SpyBean
+    DummyService dummyService;
     
     @Test
     public void testSendGreeting() throws Exception {
@@ -66,10 +71,11 @@ public class StreamKafkaTest {
         processGreetings();
         
         // then
-        verify(goodbyesListener).handleGoodbyes(any(), any());
+//        verify(goodbyesListener).handleGoodbyes(any(), any());
+        verify(dummyService).drop(any(Message.class));
+        
     }
     
-    @Ignore
     @Test
     public void testWebSendGreeting() throws Exception {
         // when
@@ -83,7 +89,8 @@ public class StreamKafkaTest {
 
         // then
         Assert.assertThat(response.getStatus(), equalTo(HttpStatus.ACCEPTED.value()));
-        verify(goodbyesListener).handleGoodbyes(any(), any());
+//        verify(goodbyesListener).handleGoodbyes(any(), any());
+        verify(dummyService).drop(any(Message.class));
     }
     
     private void processGreetings() throws Exception {
